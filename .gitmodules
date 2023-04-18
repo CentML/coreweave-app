@@ -1,0 +1,6 @@
+[submodule "erin"]
+	path = erin
+	url = https://github.com/CentML/erin
+[submodule "hidet"]
+	path = hidet
+	url = https://github.com/hidet-org/hidet
