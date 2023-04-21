@@ -49,4 +49,4 @@ COPY workspace/ /opt/program/workspace
 WORKDIR /opt/program/workspace
 
 # # Define an entrypoint script for the docker image
-ENTRYPOINT ["jupyter", "notebook"]
+ENTRYPOINT ["jupyter", "notebook", "--allow-root"]
