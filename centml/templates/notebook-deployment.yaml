@@ -24,7 +24,8 @@ spec:
             - name: notebook
               containerPort: 8888
               protocol: TCP
-
+          args:
+            - "demo"
           readinessProbe:
             tcpSocket:
               port: notebook
