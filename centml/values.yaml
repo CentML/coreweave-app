@@ -9,10 +9,6 @@ service:
     # See https://metallb.universe.tf/usage/#ip-address-sharing for more detail
     metallb.universe.tf/allow-shared-ip: example-1
 
-mounts: []
-#- name: mount-name
-#  pvc: pvc-name
-
 ingress:
   enabled: true
   subdomainOverride: ''
