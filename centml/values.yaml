@@ -1,6 +1,9 @@
 nodeSelector:
   region: ORD1
 
+imageTag: 
+  version: 1
+
 service:
   type: LoadBalancer
   annotations:
