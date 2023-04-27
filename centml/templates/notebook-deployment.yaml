@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: centml
+  name: {{ .Release.Name }}
   labels:
     app: centml
 spec:
@@ -11,11 +11,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: centml
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: centml
+        app: {{ .Release.Name }}
     spec:
       containers:
         - name: centml
@@ -65,7 +65,7 @@ spec:
                   - key: topology.kubernetes.io/region
                     operator: In
                     values:
-                      - ORD1
+                      - {{ .Values.nodeSelector.region }}
 
           # As ML testing doesn't require a lot of network throughput, we try to play nice and only schedule
           # the Pod on systems with only 1G network connections. We also desire decent CPUs. This is a preference, not a requirement.
@@ -96,5 +96,5 @@ spec:
       volumes:
         - name: storage
           persistentVolumeClaim:
-            claimName: jupyter-pv-claim
+            claimName: {{ .Release.Name }}-storage
       restartPolicy: Always
