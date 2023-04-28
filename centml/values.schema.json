@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "properties": {
+    "nodeSelector": {
+      "type": "object",
+      "form": true,
+      "title": "Node Selection",
+      "required": ["region"],
+      "properties": {
+        "region": {
+          "type": "string",
+          "enum": ["ORD1", "EWR1", "LAS1", "LGA1"],
+          "form": true,
+          "title": "Region",
+          "customComponent": {
+            "id": "region_selector",
+            "component": "RegionSelector",
+            "description": "Select your preferred region for your Jupyter instance",
+            "title": "Geographic Location"
+          }
+        }
+      }
+    },
+    "imageTag": {
+      "type": "integer",
+      "form": true,
+      "title": "Image tag",
+      "enum": [1]
+    }
+  }
+}

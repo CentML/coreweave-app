@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: centml
-          image: centml.tenant-centml-engineering.lga1.ingress.coreweave.cloud/centml:{{ .Values.imageTag.version }}
+          image: centml.tenant-centml-engineering.lga1.ingress.coreweave.cloud/centml:{{ .Values.imageTag }}
           ports:
             - name: notebook
               containerPort: 8888
