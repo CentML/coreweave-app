@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-storage
 spec:
-  # NVMe Cloud storage volumes: https://docs.coreweave.com/storage/storage#block-storage-volumes
+  # NVMe block cloud storage volumes: https://docs.coreweave.com/storage/storage#block-storage-volumes
   storageClassName: block-nvme-{{ .Values.nodeSelector.region | lower }}
   accessModes:
     - ReadWriteMany
