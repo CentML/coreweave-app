@@ -26,6 +26,9 @@
       "form": true,
       "title": "Image tag",
       "enum": [1]
+    },
+    "ingress": {
+      "enabled": true
     }
   }
 }

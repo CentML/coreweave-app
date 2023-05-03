@@ -3,12 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-storage
 spec:
-  # Available shared filesystem storage classes.
-  # Only use shared filesystems when mounting on multiple nodes is a requirement.
-  # Regular storage classes provide better performance.
-  #
-  # sharedfs-hdd-replicated - HDD Backend shared filesystem with replicas
-  # sharedfs-ssd-replicated - SSD Backed shared filesystem with replicas
+  # NVMe Cloud storage volumes: https://docs.coreweave.com/storage/storage#block-storage-volumes
   storageClassName: block-nvme-{{ .Values.nodeSelector.region | lower }}
   accessModes:
     - ReadWriteMany
