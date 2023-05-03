@@ -14,3 +14,7 @@ service:
 ingress:
   enabled: true
   subdomainOverride: ""
+
+resources:
+  requests:
+    storage: 30Gi

@@ -7,6 +7,7 @@ spec:
   storageClassName: block-nvme-{{ .Values.nodeSelector.region | lower }}
   accessModes:
     - ReadWriteMany
-  resources:
-    requests:
-      storage: 30Gi
+  {{- if .Values.resources }}
+  resources: 
+    {{- toYaml .Values.resources | nindent 4 }}
+  {{- end }}
