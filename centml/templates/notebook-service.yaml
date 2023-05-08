@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
+  {{- if .Values.service.annotations }}
   annotations:
-    metallb.universe.tf/address-pool: public
-    # Setting a sharing key might save public IP addresses
-    # See https://metallb.universe.tf/usage/#ip-address-sharing for more detail
-    metallb.universe.tf/allow-shared-ip: example-1
-  name: centml
+    {{- toYaml .Values.service.annotations | nindent 4 }}
+  {{- end }}
+  name: {{ .Release.Name }}
   labels:
-    app: centml
+    app: {{ .Release.Name }}
+
 spec:
-  type: LoadBalancer
+  type: {{  .Values.service.type  }}
   externalTrafficPolicy: Local
   ports:
     - name: notebook
@@ -18,4 +18,4 @@ spec:
       protocol: TCP
       targetPort: notebook
   selector:
-    app: centml
+    app: {{ .Release.Name }}
