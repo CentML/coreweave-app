@@ -9,7 +9,7 @@
       "properties": {
         "region": {
           "type": "string",
-          "enum": ["ORD1", "EWR1", "LAS1", "LGA1"],
+          "enum": ["ORD1", "LAS1", "LGA1"],
           "form": true,
           "title": "Region",
           "customComponent": {
@@ -22,13 +22,13 @@
       }
     },
     "imageTag": {
-      "type": "integer",
+      "type": "string",
       "form": true,
-      "title": "Image tag",
-      "enum": [1]
+      "title": "Image tag"
     },
     "ingress": {
       "enabled": true
     }
-  }
+  },
+  "required": ["imageTag"]
 }
