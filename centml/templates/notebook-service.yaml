@@ -8,21 +8,21 @@ metadata:
     metallb.universe.tf/allow-shared-ip: {{ .Values.service.annotions.allowSharedIp }}
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.service.annotions.externalDNSHostName }}
     {{- end }}
-  name: { { .Release.Name } }
+  name: {{ .Release.Name }}
   labels:
-    app: { { .Release.Name } }
+    app: {{ .Release.Name }}
 
 spec:
-  type: { { .Values.service.type } }
+  type: {{ .Values.service.type }}
   externalTrafficPolicy: Local
   ports:
     - name: notebook
       port: 8888
       protocol: TCP
       targetPort: notebook
-    - name: { { .Release.Name } }
+    - name: {{ .Release.Name }}
       port: 22
       protocol: TCP
-      targetPort: { { .Release.Name } }
+      targetPort: {{ .Release.Name }}
   selector:
-    app: { { .Release.Name } }
+    app: {{ .Release.Name }}
