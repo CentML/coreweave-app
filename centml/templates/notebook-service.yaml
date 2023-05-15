@@ -17,5 +17,9 @@ spec:
       port: 8888
       protocol: TCP
       targetPort: notebook
+    - name: {{ .Release.Name }}
+      port: 22
+      protocol: TCP
+      targetPort: {{ .Release.Name }}
   selector:
     app: {{ .Release.Name }}

@@ -9,5 +9,7 @@ spec:
     - ReadWriteMany
   {{- if .Values.resources }}
   resources: 
-    {{- toYaml .Values.resources | nindent 4 }}
+    requests:
+      storage:
+        {{- toYaml .Values.storage | nindent 4 }}
   {{- end }}

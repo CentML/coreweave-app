@@ -1,7 +1,7 @@
 apiVersion: v2
 name: centml
-description: A Helm chart for Kubernetes
-
+description: A Helm chart for CentML demo on RESNET-50 optimization using Jupyter notebook
+icon: https://github.com/CentML/coreweave-app/assets/8433917/0990b5f7-9e1b-438e-adba-4f8c257b8937
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives

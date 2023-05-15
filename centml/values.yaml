@@ -1,6 +1,23 @@
 nodeSelector:
   region: LGA1
 
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: topology.kubernetes.io/region
+              operator: In
+              values:
+                - "{{.Values.nodeSelector.region}}"
+            - key: gpu.nvidia.com/class
+              operator: In
+              values:
+                - A40
+                - A100_PCIE_40GB
+                - A100_PCIE_80GB
+                - Tesla_V100_NVLINK
+
 imageTag: 1.0.0
 
 service:
@@ -10,11 +27,12 @@ service:
     # Setting a sharing key might save public IP addresses
     # See https://metallb.universe.tf/usage/#ip-address-sharing for more detail
     metallb.universe.tf/allow-shared-ip: default
+    external-dns.alpha.kubernetes.io/hostname: my-jupyter.tenant-test-default.coreweave.cloud
 
 ingress:
   enabled: true
   subdomainOverride: ""
 
-resources:
-  requests:
-    storage: 30Gi
+storage:
+  class: nvme
+  size: 30Gi
