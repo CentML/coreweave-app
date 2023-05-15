@@ -53,6 +53,7 @@ spec:
               # demonstration purposes
               nvidia.com/gpu: 1
               cpu: "4"
+              memory: 18Gi
       affinity:
       {{ tpl (.Values.affinity | toYaml) $ | indent 2 }}
       # Node affinity can be used to require / prefer the Pods to be scheduled on a node with a specific hardware type
