@@ -49,7 +49,7 @@ spec:
               memory: 8Gi
             limits:
               # GPUs can only be allocated as a limit, which both reserves and limits the number of GPUs the Pod will have access to
-              # Making individual Pods resource light is advantageous for bin-packing. In the case of Jupyter, we stick to two GPUs for
+              # Making individual Pods resource light is advantageous for bin-packing. In the case of Jupyter, we stick to one GPU for
               # demonstration purposes
               nvidia.com/gpu: 1
       affinity:
