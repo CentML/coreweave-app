@@ -14,8 +14,6 @@ affinity:
               operator: In
               values:
                 - A40
-                - A100_PCIE_40GB
-                - A100_PCIE_80GB
 
 imageTag: 1.0.0
 
@@ -27,7 +25,6 @@ service:
     # Setting a sharing key might save public IP addresses
     # See https://metallb.universe.tf/usage/#ip-address-sharing for more detail
     allowSharedIp: default
-    externalDNSHostName: my-jupyter.tenant-test-default.coreweave.cloud
 
 storage:
   class: nvme
