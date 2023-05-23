@@ -9,7 +9,7 @@ affinity:
             - key: topology.kubernetes.io/region
               operator: In
               values:
-                - "{{.Values.nodeSelector.region}}"
+                - LGA1
             - key: gpu.nvidia.com/class
               operator: In
               values:
