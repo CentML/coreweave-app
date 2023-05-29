@@ -1,19 +1,7 @@
 nodeSelector:
   region: LGA1
 
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: topology.kubernetes.io/region
-              operator: In
-              values:
-                - LGA1
-            - key: gpu.nvidia.com/class
-              operator: In
-              values:
-                - A40
+gpuClass: A40
 
 imageTag: 1.0.0
 

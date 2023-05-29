@@ -55,7 +55,16 @@ spec:
               cpu: 8
               memory: 8Gi
       affinity:
-      {{ tpl (.Values.affinity | toYaml) $ | indent 2 }}
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: topology.kubernetes.io/region
+                    operator: In
+                    values: {{ .Values.nodeSelector.region }}
+                  - key: gpu.nvidia.com/class
+                    operator: In
+                    values: {{ .Values.gpuClass }}
       # Node affinity can be used to require / prefer the Pods to be scheduled on a node with a specific hardware type
       # No affinity allows scheduling on all hardware types that can fulfill the resource request.
       # In this example, without affinity, any NVIDIA GPU would be allowed to run the Pod.
