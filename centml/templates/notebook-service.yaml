@@ -4,8 +4,8 @@ metadata:
   type: {{ .Values.service.type }}
   annotations:
     {{- if .Values.service.publicIP }}
-    metallb.universe.tf/address-pool: {{ .Values.service.annotions.addressPool }}
-    metallb.universe.tf/allow-shared-ip: {{ .Values.service.annotions.allowSharedIp }}
+    metallb.universe.tf/address-pool: {{ .Values.service.annotations.addressPool }}
+    metallb.universe.tf/allow-shared-ip: {{ .Values.service.annotations.allowSharedIp }}
     external-dns.alpha.kubernetes.io/hostname: {{.Release.Name}}.{{.Release.Namespace}}.coreweave.cloud
     {{- end }}
   name: {{ .Release.Name }}
