@@ -20,9 +20,12 @@ spec:
       port: 8888
       protocol: TCP
       targetPort: notebook
+{{- if eq .Values.ssh true }}
     - name: {{ .Release.Name }}
       port: 22
       protocol: TCP
-      targetPort: {{ .Release.Name }}
+      targetPort: ssh
+{{- end }}
   selector:
     app: {{ .Release.Name }}
+

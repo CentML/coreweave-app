@@ -14,6 +14,6 @@ service:
     # See https://metallb.universe.tf/usage/#ip-address-sharing for more detail
     allowSharedIp: default
 
-storage:
-  class: nvme
-  size: 30Gi
+storage: 30Gi
+
+ssh: true
