@@ -6,9 +6,11 @@ spec:
   # NVMe block cloud storage volumes: https://docs.coreweave.com/storage/storage#block-storage-volumes
   storageClassName: block-nvme-{{ .Values.nodeSelector.region | lower }}
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   {{ if .Values.storage }}
   resources: 
     requests:
-      storage: {{ .Values.storage }}
+      storage: 
+        size: {{ .Values.storage }}
+        class: nvme
   {{ end }}
