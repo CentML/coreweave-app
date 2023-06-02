@@ -10,7 +10,5 @@ spec:
   {{ if .Values.storage }}
   resources: 
     requests:
-      storage: 
-        size: {{ .Values.storage }}
-        class: nvme
+      storage: {{ .Values.storage }}
   {{ end }}
