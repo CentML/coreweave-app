@@ -3,7 +3,7 @@ nodeSelector:
 
 gpuClass: A40
 
-imageTag: 1.1.0
+imageTag: 1.1.1
 
 service:
   type: LoadBalancer
