@@ -43,14 +43,14 @@ spec:
 
           resources:
             requests:
-              cpu: 8 # The CPU unit is mili-cores. 500m is 0.5 cores
+              cpu: 16 # The CPU unit is mili-cores. 500m is 0.5 cores
               memory: 8Gi
             limits:
               # GPUs can only be allocated as a limit, which both reserves and limits the number of GPUs the Pod will have access to
               # Making individual Pods resource light is advantageous for bin-packing. In the case of Jupyter, we stick to one GPU for
               # demonstration purposes
               nvidia.com/gpu: 1
-              cpu: 8
+              cpu: 16
               memory: 8Gi
       affinity:
         nodeAffinity:
