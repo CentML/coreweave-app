@@ -19,13 +19,11 @@ spec:
     spec:
       containers:
         - name: centml
-          image: centml.tenant-centml-engineering.lga1.ingress.coreweave.cloud/centml:{{ .Values.imageTag }}
+          image: public.ecr.aws/z5j3j2o3/coreweave-app:{{ .Values.imageTag }}
           ports:
             - name: notebook
               containerPort: 8888
               protocol: TCP
-          args:
-            - "demo"
           readinessProbe:
             tcpSocket:
               port: notebook
@@ -45,50 +43,28 @@ spec:
 
           resources:
             requests:
-              cpu: 8 # The CPU unit is mili-cores. 500m is 0.5 cores
+              cpu: 16 # The CPU unit is mili-cores. 500m is 0.5 cores
               memory: 8Gi
             limits:
               # GPUs can only be allocated as a limit, which both reserves and limits the number of GPUs the Pod will have access to
-              # Making individual Pods resource light is advantageous for bin-packing. In the case of Jupyter, we stick to two GPUs for
+              # Making individual Pods resource light is advantageous for bin-packing. In the case of Jupyter, we stick to one GPU for
               # demonstration purposes
               nvidia.com/gpu: 1
+              cpu: 16
+              memory: 8Gi
       affinity:
         nodeAffinity:
-          # This will REQUIRE the Pod to be run on a system with a Pascal GPU
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: gpu.nvidia.com/class
-                    operator: In
-                    values:
-                      - NV_Pascal
                   - key: topology.kubernetes.io/region
                     operator: In
-                    values:
+                    values: 
                       - {{ .Values.nodeSelector.region }}
-
-          # As ML testing doesn't require a lot of network throughput, we try to play nice and only schedule
-          # the Pod on systems with only 1G network connections. We also desire decent CPUs. This is a preference, not a requirement.
-          # If systems with i5 / i9 / Xeon CPUs and/or 1G ethernet are not available to fulfill the requested resources, the Pods
-          # will be scheduled on higher end systems.
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 10
-              preference:
-                matchExpressions:
-                  - key: cpu.atlantic.cloud/family
+                  - key: gpu.nvidia.com/class
                     operator: In
-                    values:
-                      - i7
-                      - i5
-                      - i9
-                      - xeon
-            - weight: 10
-              preference:
-                matchExpressions:
-                  - key: ethernet.atlantic.cloud/speed
-                    operator: In
-                    values:
-                      - 1G
+                    values: 
+                      - {{ .Values.gpuClass }}
       # Node affinity can be used to require / prefer the Pods to be scheduled on a node with a specific hardware type
       # No affinity allows scheduling on all hardware types that can fulfill the resource request.
       # In this example, without affinity, any NVIDIA GPU would be allowed to run the Pod.

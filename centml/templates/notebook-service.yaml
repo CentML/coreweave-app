@@ -1,21 +1,30 @@
 apiVersion: v1
 kind: Service
 metadata:
-  {{- if .Values.service.annotations }}
   annotations:
-    {{- toYaml .Values.service.annotations | nindent 4 }}
-  {{- end }}
+    {{- if .Values.service.publicIP }}
+    metallb.universe.tf/address-pool: {{ .Values.service.annotations.addressPool }}
+    metallb.universe.tf/allow-shared-ip: {{ .Values.service.annotations.allowSharedIp }}
+    external-dns.alpha.kubernetes.io/hostname: {{.Release.Name}}.{{.Release.Namespace}}.coreweave.cloud
+    {{- end }}
   name: {{ .Release.Name }}
   labels:
     app: {{ .Release.Name }}
 
 spec:
-  type: {{  .Values.service.type  }}
+  type: {{ .Values.service.type }}
   externalTrafficPolicy: Local
   ports:
     - name: notebook
       port: 8888
       protocol: TCP
       targetPort: notebook
+{{- if eq .Values.ssh true }}
+    - name: {{ .Release.Name }}
+      port: 22
+      protocol: TCP
+      targetPort: ssh
+{{- end }}
   selector:
     app: {{ .Release.Name }}
+
